@@ -49,7 +49,6 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
  .from('.hero-assembly',{rotation:-60,scale:.78,opacity:0,duration:1.5},.05)
  .from('.hero .intro, .hero-copy .button',{opacity:0,y:12,duration:.6,stagger:.1},.8)
  .from('.hero-bottom',{opacity:0,duration:.8},1.1);
- gsap.to('.orbit',{rotation:'+=360',duration:55,repeat:-1,ease:'none'});
  gsap.to('.hero-grid',{yPercent:18,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
  gsap.to('.hero-assembly',{y:75,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
  const mm=gsap.matchMedia();
@@ -80,6 +79,6 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
 });
 // Active navigation follows the actual section, including long pinned intervals.
 const navLinks=[...document.querySelectorAll('#navigation a')];
-function updateNavigation(){const pos=scrollY+innerHeight*.35;let current='';for(const id of ['system','products','technology','philosophy','fit']){const el=document.getElementById(id);const trigger=id==='system'?ScrollTrigger.getById('assembly'):null;const top=trigger?trigger.start:el.getBoundingClientRect().top+scrollY;if(pos>=top)current=id;}navLinks.forEach(a=>{const active=a.hash==='#'+current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
+function updateNavigation(){const pos=scrollY+innerHeight*.35;let current='';for(const id of ['system','products','series','technology','philosophy','fit']){const el=document.getElementById(id);const trigger=id==='system'?ScrollTrigger.getById('assembly'):null;const top=trigger?trigger.start:el.getBoundingClientRect().top+scrollY;if(pos>=top)current=id;}navLinks.forEach(a=>{const active=a.hash==='#'+current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
 window.addEventListener('scroll',updateNavigation,{passive:true});
 window.addEventListener('load',()=>{ScrollTrigger.refresh();updateNavigation();});
