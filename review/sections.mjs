@@ -1,0 +1,2 @@
+import {chromium} from '@playwright/test';
+const browser=await chromium.launch({args:['--no-sandbox']});const p=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});await p.goto('http://localhost:5173');await p.waitForTimeout(1000);for(const id of ['system','products','technology','philosophy','fit']){await p.locator('#'+id).scrollIntoViewIfNeeded();await p.waitForTimeout(300);await p.screenshot({path:`review/${id}.png`});}await browser.close();

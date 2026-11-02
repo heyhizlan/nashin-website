@@ -1,0 +1,2 @@
+import {chromium} from '@playwright/test';
+const b=await chromium.launch({args:['--no-sandbox']});const p=await b.newPage();for(const width of [375,1440]){await p.setViewportSize({width,height:812});await p.goto('http://localhost:5173');await p.waitForTimeout(1400);const y=await p.locator('.pin-spacer').evaluate(e=>e.offsetTop);await p.evaluate(y=>scrollTo(0,y+innerHeight*2.5),y);await p.waitForTimeout(1400);await p.screenshot({path:`review/assembly-${width}.png`});}await b.close();

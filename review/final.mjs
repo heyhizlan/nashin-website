@@ -1,0 +1,2 @@
+import {chromium} from '@playwright/test';
+const b=await chromium.launch({args:['--no-sandbox']});const p=await b.newPage({viewport:{width:1440,height:1000}});await p.goto('http://localhost:5173');await p.waitForTimeout(2000);await p.screenshot({path:'review/final-desktop.png'});await p.setViewportSize({width:375,height:812});await p.goto('http://localhost:5173');await p.waitForTimeout(1800);await p.screenshot({path:'review/final-mobile.png'});await b.close();

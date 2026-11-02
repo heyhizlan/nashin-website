@@ -1,0 +1,4 @@
+import {chromium} from '@playwright/test';
+const b=await chromium.launch({args:['--no-sandbox']});const p=await b.newPage({viewport:{width:1440,height:1000}});
+await p.goto('https://bmwf3.com',{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);console.log('entry controls',await p.getByText(/START ENGINE/i).count());try{await p.getByText(/START ENGINE/i).first().click({timeout:10000});await p.waitForTimeout(4000);await p.screenshot({path:'review/reference-bmw-entered.png'});await p.mouse.wheel(0,2200);await p.waitForTimeout(2000);await p.screenshot({path:'review/reference-bmw-entered-scroll.png'});console.log((await p.locator('body').innerText()).slice(0,1500));}catch(e){console.log(e.message)}
+await p.goto('https://mecha-xyz.webflow.io',{waitUntil:'domcontentloaded'});await p.waitForTimeout(2000);await p.mouse.wheel(0,3400);await p.waitForTimeout(2500);await p.screenshot({path:'review/reference-mecha-deep.png'});await b.close();
