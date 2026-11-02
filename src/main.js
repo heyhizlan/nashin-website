@@ -75,7 +75,6 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
  gsap.utils.toArray('.count').forEach(el=>{const counter={value:0};gsap.to(counter,{value:Number(el.dataset.value),duration:1.5,ease:'power2.out',scrollTrigger:{trigger:'.tech-stats',start:'top 90%',once:true},onUpdate:()=>el.textContent=Math.round(counter.value)});});
  gsap.to(globeState,{rotation:.9,ease:'none',onUpdate:drawGlobe,scrollTrigger:{trigger:'.philosophy',start:'top bottom',end:'bottom top',scrub:1}});
  gsap.from('.globe-caption',{letterSpacing:'.35em',opacity:.2,ease:'none',scrollTrigger:{trigger:'.philosophy',start:'top 75%',end:'center center',scrub:true}});
- gsap.from('.car',{xPercent:35,opacity:0,ease:'none',scrollTrigger:{trigger:'.fit',start:'top 85%',end:'center 65%',scrub:1}});
  gsap.from('.footer-top',{y:30,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
  return ()=>{mm.revert();gsap.ticker.remove(tick);lenis.destroy();lenis=null;};
 });

@@ -25,3 +25,12 @@ body:not(.static-motion) .diagram-note{margin:.6rem 0 0;font-size:.48rem}
 .arrow-icon:before{content:'';position:absolute;right:0;top:0;width:.5rem;height:.5rem;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor}
 .arrow-icon:after{content:'';position:absolute;right:.36rem;top:-.08rem;width:1.5px;height:1rem;background:currentColor;transform:rotate(45deg)}
 .feature>.arrow-icon{margin-top:.4rem;margin-right:.25rem}
+
+/* Navigation and type refinements. */
+header,header nav.open{border-bottom:0}
+header nav{font-family:var(--spec)}
+header nav a{gap:.55rem;font-family:var(--spec);font-size:.75rem;letter-spacing:.01em}
+.nav-index{color:var(--red);font-size:.62rem;letter-spacing:.08em}
+h1,h2,h3{text-transform:uppercase}
+.hero h1{font-style:normal}
+.hero h1 .mask:nth-child(2){font-style:italic}
