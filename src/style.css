@@ -43,8 +43,6 @@ h1,h2,h3{text-transform:uppercase}
 .series-heading p{margin:0;max-width:34ch}
 .series-grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
 .series-card{min-height:290px;background:#101315;padding:1.6rem;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start}
-.series-card:before{content:'';position:absolute;width:175px;height:175px;right:-55px;bottom:-80px;border:1px solid #f12b3250;border-radius:50%;transition:transform .35s ease}
-.series-card:hover:before{transform:scale(1.45)}
 .series-card .eyebrow{font-size:.6rem;position:relative;z-index:1}
 .series-index{color:var(--red);font:.7rem var(--spec);letter-spacing:.1em;margin-left:auto;position:relative;z-index:1}
 .series-card h3{font-size:clamp(3.2rem,9vw,5.8rem);font-weight:800;line-height:.8;margin:2rem 0 .8rem;position:relative;z-index:1}
@@ -55,3 +53,8 @@ h1,h2,h3{text-transform:uppercase}
 .fit form{margin-top:300px}
 @media(min-width:768px){.series-heading{grid-template-columns:1fr 1fr;align-items:end;gap:3rem;margin-bottom:3.5rem}.series-grid{grid-template-columns:repeat(2,1fr)}.series-card{min-height:330px;padding:2rem}.series-card h3{font-size:clamp(4rem,6vw,6.5rem)}}
 @media(min-width:1024px){.series-grid{grid-template-columns:repeat(4,1fr)}.series-card{min-height:390px}.series-card h3{font-size:clamp(3.8rem,5vw,5.8rem)}}
+
+/* Refined headline hierarchy and navigation treatment. */
+header nav a,.button{text-transform:uppercase}
+h2{font-style:normal}
+.headline-italic{color:inherit;font-style:italic}

@@ -79,6 +79,6 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
 });
 // Active navigation follows the actual section, including long pinned intervals.
 const navLinks=[...document.querySelectorAll('#navigation a')];
-function updateNavigation(){const pos=scrollY+innerHeight*.35;let current='';for(const id of ['system','products','series','technology','philosophy','fit']){const el=document.getElementById(id);const trigger=id==='system'?ScrollTrigger.getById('assembly'):null;const top=trigger?trigger.start:el.getBoundingClientRect().top+scrollY;if(pos>=top)current=id;}navLinks.forEach(a=>{const active=a.hash==='#'+current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
+function updateNavigation(){const pos=scrollY+innerHeight*.35;let current='';for(const id of ['system','series','products','technology','philosophy','fit']){const el=document.getElementById(id);const trigger=id==='system'?ScrollTrigger.getById('assembly'):null;const top=trigger?trigger.start:el.getBoundingClientRect().top+scrollY;if(pos>=top)current=id;}navLinks.forEach(a=>{const active=a.hash==='#'+current;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}
 window.addEventListener('scroll',updateNavigation,{passive:true});
 window.addEventListener('load',()=>{ScrollTrigger.refresh();updateNavigation();});
