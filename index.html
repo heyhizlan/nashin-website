@@ -19,9 +19,7 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header>
-      <a class="logo" href="#home" aria-label="Nashin home"
-        >NASHIN<span>®</span></a
-      ><button
+      <a class="logo" href="#home" aria-label="Nashin home"><img src="/images/nashin-logo.svg" alt="Nashin" /></a><button
         class="menu-toggle"
         aria-expanded="false"
         aria-controls="navigation"
@@ -338,7 +336,7 @@
               loading="lazy"
             />
             <div class="heat-overlay"></div>
-            <span class="mono heat-label">THERMAL LOAD <b>LOW → HIGH</b></span>
+            <svg class="airflow" viewBox="0 0 600 600" aria-label="Airflow moving through rotor vents" role="img"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="m0 0 6 3-6 3" fill="none" stroke="#aebbc3" /></marker></defs><g fill="none" stroke="#aebbc3" stroke-width="2" stroke-dasharray="20 18" marker-end="url(#arrow)"><path d="M270 290Q80 210 25 50" /><path d="M325 280Q460 160 565 90" /><path d="M315 330Q420 465 575 530" /><path d="M275 335Q140 450 35 490" /></g></svg><span class="mono heat-label">THERMAL LOAD <b>LOW → HIGH</b></span>
           </div>
         </div>
         <div class="tech-stats" id="tech-stats"></div>
@@ -421,7 +419,7 @@
     </main>
     <footer id="dealer">
       <div class="footer-top">
-        <a class="logo" href="#home">NASHIN<span>®</span></a>
+        <a class="logo" href="#home" aria-label="Nashin home"><img src="/images/nashin-logo.svg" alt="Nashin" /></a>
         <p>Make the next stop<br />an informed one.</p>
         <a
           class="button"

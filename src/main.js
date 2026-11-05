@@ -9,8 +9,8 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const statMarkup = (s, animated=false) => `<div class="stat"><strong><span class="sign">${s.prefix}</span><span ${animated?'class="count" data-value="'+s.value+'"':''}>${s.value}</span><span>${s.suffix}</span></strong><p>${s.label}</p></div>`;
 $('#hero-stats').innerHTML=stats.map(s=>statMarkup(s)).join('');
 $('#tech-stats').innerHTML=stats.map(s=>statMarkup(s,true)).join('');
-$('#sessions').textContent=`${reach.sessions}+`;
-$('#regions').textContent=`${reach.regions}+`;
+$('#sessions').innerHTML=`${reach.sessions}<span class="sign">+</span>`;
+$('#regions').innerHTML=`${reach.regions}<span class="sign">+</span>`;
 $('#copyright-year').textContent=new Date().getFullYear();
 const menu=$('.menu-toggle'), nav=$('#navigation');
 function closeMenu(){menu.setAttribute('aria-expanded','false');nav.classList.remove('open');}
@@ -63,12 +63,12 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
   callouts.forEach((el,i)=>{if(i){tl.to(callouts[i-1],{autoAlpha:0,y:-8,duration:.15},i);tl.fromTo(el,{autoAlpha:0,y:12},{autoAlpha:1,y:0,duration:.25},i+.08);}});
   tl.to({}, {duration:.2},2.8);
  });
- gsap.from('.rotor-panel img',{opacity:.35,ease:'none',scrollTrigger:{trigger:'.rotor-panel',start:'top bottom',end:'bottom top',scrub:1}});
+ gsap.fromTo('.rotor-panel img',{rotation:-35,y:45},{rotation:15,y:-15,ease:'none',scrollTrigger:{trigger:'.rotor-panel',start:'top bottom',end:'bottom top',scrub:1}});
  gsap.from('.pads-panel img',{clipPath:'inset(100% 0 0 0)',y:40,ease:'none',scrollTrigger:{trigger:'.pads-panel',start:'top 85%',end:'center 55%',scrub:.5}});
  gsap.from('.kit-panel img',{xPercent:15,ease:'none',scrollTrigger:{trigger:'.kit-panel',start:'top bottom',end:'center center',scrub:1}});
  gsap.from('.product-title',{x:-15,opacity:0,duration:.5,scrollTrigger:{trigger:'.rotor-panel',start:'top 80%'}});
  const heat=gsap.timeline({scrollTrigger:{trigger:'.technology',start:'top 65%',end:'bottom 45%',scrub:1}});
- heat.to('.heat-overlay',{opacity:.75,yPercent:12,ease:'none'},0).to('.heat-stage>img',{filter:'sepia(.5) saturate(1.4)',ease:'none'},0);
+ heat.to('.heat-overlay',{opacity:.75,yPercent:12,ease:'none'},0).to('.heat-stage>img',{rotation:65,filter:'sepia(.5) saturate(1.4)',ease:'none'},0).to('.airflow path',{strokeDashoffset:-220,ease:'none'},0);
  gsap.utils.toArray('.feature').forEach(el=>gsap.from(el,{borderColor:'#f12b32',duration:.8,scrollTrigger:{trigger:el,start:'top 80%'}}));
  gsap.utils.toArray('.count').forEach(el=>{const counter={value:0};gsap.to(counter,{value:Number(el.dataset.value),duration:1.5,ease:'power2.out',scrollTrigger:{trigger:'.tech-stats',start:'top 90%',once:true},onUpdate:()=>el.textContent=Math.round(counter.value)});});
  gsap.to(globeState,{rotation:.9,ease:'none',onUpdate:drawGlobe,scrollTrigger:{trigger:'.philosophy',start:'top bottom',end:'bottom top',scrub:1}});

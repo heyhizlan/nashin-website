@@ -73,5 +73,15 @@ h2{font-style:normal}
 .series-heading h2 .headline-italic{white-space:nowrap}
 .series-card,.series-n1,.series-gt{background:#101315}
 .pads-panel{border-top:1px solid #30363a}
-.parts .part-pads{inset:-12%;width:124%;height:124%;max-width:none;object-fit:contain}
-.heat-stage>img{transform:none}
+.parts .part-caliper{inset:-25%;width:150%;height:150%;max-width:none;object-fit:contain}
+.parts .part-pads{inset:-35%;width:170%;height:170%;max-width:none;object-fit:contain}
+.parts .part-rotor{inset:-18%;width:136%;height:136%;max-width:none;object-fit:contain}
+.heat-stage>img{transform:scale(.88)}
+.reach strong{color:var(--text)}
+.reach .sign{color:var(--red);font:inherit}
+.logo{width:160px;min-height:0;padding:0;transform:none}
+.logo img{display:block;width:100%;height:auto}
+.footer-top .logo{width:min(300px,100%);font-size:inherit}
+.footer-bottom nav{gap:1.25rem}
+.footer-bottom nav a{min-height:44px;align-items:center;text-transform:uppercase;color:#a4abb0;font:500 .65rem var(--spec);letter-spacing:.08em}
+.footer-bottom nav a:hover,.footer-bottom nav a:focus-visible{color:var(--text)}
