@@ -45,7 +45,8 @@ The workflow installs exact locked dependencies, builds, uploads `dist`, and dep
 - `src/data.js` contains all performance and reach numbers, plus the demonstration vehicle dataset. **Every supplied statistic must be verified with Nashin before launch.** The page labels those numbers as illustrative.
 - The finder supports Honda, Toyota, BMW and Proton with dependent model/year selections. It deliberately reports no verified product matches. Connect a reviewed fitment database before using this for sales.
 - Original transparent component placeholders live in `public/images/*.svg`. Replace the matching SVG file without changing code. `rotor-ring.svg` is the friction-only version for the exploded diagram; `rotor.svg` includes the centre for standalone illustrations. All product illustrations are schematic, not CAD or exact product representations.
-- `kit.jpg` is a filler product photograph fetched from Nashin's public site: https://static.wixstatic.com/media/6a5387_22f2d64ace2640f387443b5fcf20ffc0~mv2.jpg . Confirm rights and approved product photography before launch.
+- CUP Series product cutouts live in `public/images/products/*.webp`: trimmed, transparent (alpha) WebP. Keep new cutouts trimmed to the object with a 2% transparent border so sizing stays consistent.
+- `kit.webp` is a filler product photograph fetched from Nashin's public site: https://static.wixstatic.com/media/6a5387_22f2d64ace2640f387443b5fcf20ffc0~mv2.jpg . Confirm rights and approved product photography before launch.
 - `create-assets.py` reproduces the original SVG placeholders and downloads that filler photograph. It is not required to build or run.
 - Dealer CTAs route to the official Nashin site. No dealer directory or verified location list was available; wire in the approved dealer destination before launch.
 - No mockup attachment was visible in this session. The design follows the written brief.

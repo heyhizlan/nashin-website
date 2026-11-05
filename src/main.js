@@ -54,9 +54,11 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
  const mm=gsap.matchMedia();
  mm.add({desktop:'(min-width:768px)',mobile:'(max-width:767px)'},c=>{
   const desktop=c.conditions.desktop;
-  const tl=gsap.timeline({scrollTrigger:{id:'assembly',trigger:'.system',start:'top top',end:()=>`+=${innerHeight*2.5}`,pin:true,scrub:.65,anticipatePin:1,invalidateOnRefresh:true,onUpdate:self=>{const cards=gsap.utils.toArray('.callout');const visible=cards.reduce((best,el,i)=>Number(gsap.getProperty(el,'opacity'))>Number(gsap.getProperty(cards[best],'opacity'))?i:best,0);$('.sequence-active').textContent=String(visible+1).padStart(2,'0');}}});
+  const tl=gsap.timeline({scrollTrigger:{id:'assembly',trigger:'.system',start:'top top',end:()=>`+=${innerHeight*2.5}`,pin:true,scrub:.65,anticipatePin:1,invalidateOnRefresh:true}});
+  const step=$('.sequence-active'),steps=gsap.utils.toArray('.callout').length;
+  tl.eventCallback('onUpdate',()=>{step.textContent=String(Math.min(steps,Math.max(1,Math.floor(tl.time()-.05)+1))).padStart(2,'0');});
   const parts=gsap.utils.toArray('.part');
-  tl.set(parts,{autoAlpha:0},0).set(parts[0],{autoAlpha:1},0);
+  gsap.set(parts.slice(1),{autoAlpha:0});gsap.set(parts[0],{autoAlpha:1});
   parts.slice(1).forEach((part,i)=>{const at=i+1;tl.to(parts[i],{autoAlpha:0,duration:.18},at).fromTo(part,{autoAlpha:0},{autoAlpha:1,duration:.22},at+.06);});
   tl.to('.sequence i',{width:'100%',duration:3,ease:'none'},0);
   const callouts=gsap.utils.toArray('.callout');

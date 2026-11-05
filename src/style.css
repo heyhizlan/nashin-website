@@ -4,7 +4,7 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 /* CUP Series cutouts: one untransformed product at a time. */
 .hero-assembly{transform:translate(-50%,-50%)}.hero-assembly .hero-rotor{transform:none}
-.parts .part{inset:0;width:100%;height:100%;object-fit:contain;transform:none!important;opacity:0;visibility:hidden}
+.parts .part{inset:0;margin:auto;width:100%;height:100%;max-width:none;object-fit:contain;transform:none!important;opacity:0;visibility:hidden}
 .parts .part-caliper{opacity:1;visibility:visible}
 .static-motion .parts .part{display:none}.static-motion .parts .part-caliper{display:block}
 .series-image{position:absolute;right:0;bottom:0;z-index:0;width:auto;height:auto;max-width:62%;max-height:64%;object-fit:contain;pointer-events:none;filter:drop-shadow(12px 14px 18px #0008)}
@@ -17,9 +17,6 @@ body:not(.static-motion) .system-heading h2{font-size:clamp(2.1rem,4.5vw,4rem)}
 body:not(.static-motion) .system-heading p{font-size:.75rem;margin:.7rem 0 0;line-height:1.5}
 body:not(.static-motion) .system-stage{flex:1;min-height:0;height:auto;margin:.8rem 0 0}
 body:not(.static-motion) .parts{height:52%;top:0}
-body:not(.static-motion) .part-rotor,body:not(.static-motion) .part-hat{height:100%;object-fit:contain}
-body:not(.static-motion) .part-caliper{height:86%;object-fit:contain}
-body:not(.static-motion) .part-pads{height:48%;object-fit:contain}
 body:not(.static-motion) .callouts{bottom:0;min-height:150px}
 body:not(.static-motion) .callout{padding:.8rem 0}
 body:not(.static-motion) .callout h3{font-size:1.2rem;margin:.6rem 0}
@@ -58,7 +55,7 @@ h1,h2,h3{text-transform:uppercase}
 .series-copy{font-size:.84rem;line-height:1.5;margin:auto 0 0;max-width:26ch;position:relative;z-index:1}
 .series-n1{background:linear-gradient(135deg,#181d21,#101315)}
 .series-gt{background:linear-gradient(135deg,#161315,#101315)}
-.fit form{margin-top:300px}
+.fit form{margin-top:2.5rem}
 @media(min-width:768px){.series-heading{grid-template-columns:1fr 1fr;align-items:end;gap:3rem;margin-bottom:3.5rem}.series-grid{grid-template-columns:repeat(2,1fr)}.series-card{min-height:330px;padding:2rem}.series-card h3{font-size:clamp(4rem,6vw,6.5rem)}}
 @media(min-width:1024px){.series-grid{grid-template-columns:repeat(4,1fr)}.series-card{min-height:390px}.series-card h3{font-size:clamp(3.8rem,5vw,5.8rem)}}
 
@@ -73,9 +70,6 @@ h2{font-style:normal}
 .series-heading h2 .headline-italic{white-space:nowrap}
 .series-card,.series-n1,.series-gt{background:#101315}
 .pads-panel{border-top:1px solid #30363a}
-.parts .part-caliper{inset:-25%;width:150%;height:150%;max-width:none;object-fit:contain}
-.parts .part-pads{inset:-35%;width:170%;height:170%;max-width:none;object-fit:contain}
-.parts .part-rotor{inset:-18%;width:136%;height:136%;max-width:none;object-fit:contain}
 .heat-stage>img{transform:scale(.88)}
 .reach strong{color:var(--text)}
 .reach .sign{color:var(--red);font:inherit}
@@ -85,7 +79,30 @@ h2{font-style:normal}
 .footer-bottom nav{gap:1.25rem}
 .footer-bottom nav a{min-height:44px;align-items:center;text-transform:uppercase;color:#a4abb0;font:500 .65rem var(--spec);letter-spacing:.08em}
 .footer-bottom nav a:hover,.footer-bottom nav a:focus-visible{color:var(--text)}
-body:not(.static-motion) .parts .part-pads{inset:-75%;width:250%;height:250%;max-width:none;object-fit:contain}
 .reach .sign{display:inline;margin:0;padding:0;vertical-align:baseline}
 @media(min-width:768px){.hero-assembly{width:80%;max-width:416px}}
 @media(min-width:1024px){.hero-assembly{max-width:488px}}
+
+/* QA pass: trimmed WebP cutouts, consistent sizing and alignment at phone / tablet / desktop. */
+.parts .part-caliper{width:84%;height:84%}
+.parts .part-pads{width:86%;height:56%}
+.parts .part-rotor{width:90%;height:90%}
+.static-motion .callouts{margin-top:1.5rem}
+.logo{min-height:44px;display:inline-flex;align-items:center}
+.menu-toggle,.button.small{white-space:nowrap}
+.menu-toggle{font-family:var(--spec);text-transform:uppercase;letter-spacing:.08em}
+.nav-index{min-width:1.3rem}
+header nav.open{padding:1.5rem 1.25rem}
+.stage-label{z-index:3}
+.hero-note,.diagram-note,body:not(.static-motion) .diagram-note,.stage-label,.stage-caption span,.product-tag,.globe-pin,.globe-caption{font-size:.6rem}
+.kit-panel img{object-fit:contain;aspect-ratio:auto;width:100%;height:240px}
+.feature>span{flex:0 0 1.5rem;text-align:center}
+.feature>.arrow-icon{flex:0 0 .8rem;margin:.45rem .35rem 0}
+.series-card{min-height:0}
+.series-index{order:0}.series-card .eyebrow{order:1}.series-card h3{order:2}.series-variants{order:3}
+.series-image{position:static;order:4;align-self:center;width:auto;max-width:80%;height:190px;max-height:none;margin:auto auto 1.5rem;padding-top:1.5rem;box-sizing:content-box}
+.series-copy{order:5;margin:0}
+@media(max-width:767px){.stage-label{top:-1.4rem}.logo{width:124px}.button.small{gap:.5rem;padding:.5rem .65rem}}
+@media(min-width:768px){header nav.open{padding:1.5rem 3rem}.kit-panel img{height:300px}.series-image{height:200px}}
+@media(min-width:768px) and (max-width:1023px){.hero-stage{margin-left:0}.hero h1{font-size:clamp(3.3rem,6.9vw,4.3rem)}.series-heading{grid-template-columns:1fr;gap:1.5rem}.series-heading p{max-width:40ch}.footer-top{flex-direction:column;align-items:flex-start}}
+@media(min-width:1024px){header{padding:0 5.5%}.rotor-panel img{width:62%;max-width:400px}.heat-stage{width:100%;margin-left:0}.series-image{height:180px}}
