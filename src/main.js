@@ -68,7 +68,7 @@ media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-red
  gsap.from('.kit-panel img',{xPercent:15,ease:'none',scrollTrigger:{trigger:'.kit-panel',start:'top bottom',end:'center center',scrub:1}});
  gsap.from('.product-title',{x:-15,opacity:0,duration:.5,scrollTrigger:{trigger:'.rotor-panel',start:'top 80%'}});
  const heat=gsap.timeline({scrollTrigger:{trigger:'.technology',start:'top 65%',end:'bottom 45%',scrub:1}});
- heat.to('.heat-overlay',{opacity:.75,yPercent:12,ease:'none'},0).to('.heat-stage>img',{rotation:65,filter:'sepia(.5) saturate(1.4)',ease:'none'},0).to('.airflow path',{strokeDashoffset:-220,ease:'none'},0);
+ heat.set('.heat-stage>img',{yPercent:-10,transformOrigin:'50% 50%'},0).to('.heat-overlay',{opacity:.75,yPercent:12,ease:'none'},0).to('.heat-stage>img',{rotation:65,filter:'sepia(.5) saturate(1.4)',ease:'none'},0).to('.airflow path',{strokeDashoffset:-220,ease:'none'},0);
  gsap.utils.toArray('.feature').forEach(el=>gsap.from(el,{borderColor:'#f12b32',duration:.8,scrollTrigger:{trigger:el,start:'top 80%'}}));
  gsap.utils.toArray('.count').forEach(el=>{const counter={value:0};gsap.to(counter,{value:Number(el.dataset.value),duration:1.5,ease:'power2.out',scrollTrigger:{trigger:'.tech-stats',start:'top 90%',once:true},onUpdate:()=>el.textContent=Math.round(counter.value)});});
  gsap.to(globeState,{rotation:.9,ease:'none',onUpdate:drawGlobe,scrollTrigger:{trigger:'.philosophy',start:'top bottom',end:'bottom top',scrub:1}});

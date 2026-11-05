@@ -85,3 +85,7 @@ h2{font-style:normal}
 .footer-bottom nav{gap:1.25rem}
 .footer-bottom nav a{min-height:44px;align-items:center;text-transform:uppercase;color:#a4abb0;font:500 .65rem var(--spec);letter-spacing:.08em}
 .footer-bottom nav a:hover,.footer-bottom nav a:focus-visible{color:var(--text)}
+body:not(.static-motion) .parts .part-pads{inset:-75%;width:250%;height:250%;max-width:none;object-fit:contain}
+.reach .sign{display:inline;margin:0;padding:0;vertical-align:baseline}
+@media(min-width:768px){.hero-assembly{width:80%;max-width:416px}}
+@media(min-width:1024px){.hero-assembly{max-width:488px}}
