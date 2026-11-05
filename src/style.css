@@ -106,3 +106,6 @@ header nav.open{padding:1.5rem 1.25rem}
 @media(min-width:768px){header nav.open{padding:1.5rem 3rem}.kit-panel img{height:300px}.series-image{height:200px}}
 @media(min-width:768px) and (max-width:1023px){.hero-stage{margin-left:0}.hero h1{font-size:clamp(3.3rem,6.9vw,4.3rem)}.series-heading{grid-template-columns:1fr;gap:1.5rem}.series-heading p{max-width:40ch}.footer-top{flex-direction:column;align-items:flex-start}}
 @media(min-width:1024px){header{padding:0 5.5%}.rotor-panel img{width:62%;max-width:400px}.heat-stage{width:100%;margin-left:0}.series-image{height:180px}}
+
+/* Heat stage: rotor, glow and airflow share one centre. */
+.heat-stage>img{width:100%;height:100%;object-fit:contain;transform-origin:50% 50%}
