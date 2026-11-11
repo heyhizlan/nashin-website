@@ -15,7 +15,7 @@ npm run preview
 # http://localhost:4173
 ```
 
-`dist/` is the deployable static site. `base: './'` makes assets work at `/nashin-website/` on GitHub Pages. Google Fonts are loaded from Google's servers, with local sans-serif fallbacks. JavaScript dependencies bundle locally.
+`dist/` is the deployable static site. The next preview is intended for the owner's Vercel account. Google Fonts are loaded from Google's servers, with local sans-serif fallbacks. JavaScript dependencies bundle locally.
 
 ## GitHub repository and push
 
@@ -31,21 +31,16 @@ gh repo create nashin-website --public --source=. --remote=origin --push
 
 If using the supplied checkout that already has a local commit, the `git init`, `add` and `commit` lines can be skipped; run the `gh repo create` line from the checkout. The archive contains source without Git metadata, so all five lines apply after extracting it.
 
-## GitHub Pages deploy
+## Vercel preview
 
-1. Create and push the repository using the commands above.
-2. Open **Settings → Pages → Build and deployment → Source → GitHub Actions**.
-3. Open **Actions → Deploy to GitHub Pages → Run workflow**, choose `main`, and run. Subsequent pushes to `main` deploy automatically.
-4. Open the URL produced by the deploy job, normally `https://YOUR_USERNAME.github.io/nashin-website/`.
-
-The workflow installs exact locked dependencies, builds, uploads `dist`, and deploys with GitHub's official Pages actions. No deployment tokens need to be stored in this repository.
+Import the repository into the owner's Vercel account. Use `npm run build` as the build command and `dist` as the output directory. Deployment is separate from the local commit.
 
 ## Content and assets
 
-- `src/data.js` contains all performance and reach numbers, plus the demonstration vehicle dataset. **Every supplied statistic must be verified with Nashin before launch.** The page labels those numbers as illustrative.
+- `src/data.js` contains the demonstration vehicle dataset. The unverified performance and reach figures have been removed from the page.
 - The finder supports Honda, Toyota, BMW and Proton with dependent model/year selections. It deliberately reports no verified product matches. Connect a reviewed fitment database before using this for sales.
 - Original transparent component placeholders live in `public/images/*.svg`. Replace the matching SVG file without changing code. `rotor-ring.svg` is the friction-only version for the exploded diagram; `rotor.svg` includes the centre for standalone illustrations. All product illustrations are schematic, not CAD or exact product representations.
-- CUP Series product cutouts live in `public/images/products/*.webp`: trimmed, transparent (alpha) WebP. Keep new cutouts trimmed to the object with a 2% transparent border so sizing stays consistent.
+- Product cutouts live in `public/images/products/*.webp`. The N1M, N1, GN8 and GR5 card images are transparent WebP cutouts derived from the supplied model photos; GN8 and GR5 represent their respective series. Keep replacement cutouts trimmed with a small transparent border.
 - `kit.webp` is a filler product photograph fetched from Nashin's public site: https://static.wixstatic.com/media/6a5387_22f2d64ace2640f387443b5fcf20ffc0~mv2.jpg . Confirm rights and approved product photography before launch.
 - `create-assets.py` reproduces the original SVG placeholders and downloads that filler photograph. It is not required to build or run.
 - Dealer CTAs route to the official Nashin site. No dealer directory or verified location list was available; wire in the approved dealer destination before launch.
@@ -53,7 +48,7 @@ The workflow installs exact locked dependencies, builds, uploads `dist`, and dep
 
 ## Motion and accessibility
 
-The hero has one coordinated masked-text/product entrance. ScrollTrigger pins the system and controls four component movements and sequential explanations; reverse scroll reassembles it. Three product panels use rotation, clipping and lateral movement. Heat tint and airflow respond to scroll, the generated dotted globe rotates with a geographically projected Kuala Lumpur pin, and the car moves into the finder. All scene code is original.
+The hero has one coordinated masked-text/product entrance. ScrollTrigger pins the system and controls three component movements and sequential explanations; reverse scroll reassembles it. Three product panels use rotation, clipping and lateral movement. Heat tint and airflow respond to scroll. All scene code is original.
 
 Lenis and GSAP share one animation ticker. `prefers-reduced-motion` disables smooth scrolling, pinning and animation; all four explanations become regular readable content. Changing the preference while the page is open tears down and rebuilds the motion context. Keyboard focus, skip link, labelled native selects, Escape-dismissable mobile navigation and live fitment results are included.
 
@@ -68,4 +63,4 @@ Nine browser tests cover 375, 414, 768, 1024 and 1440px widths, reduced-motion r
 
 ## Design review
 
-See `DESIGN.md` for the original design plan, reference observations and the three post-build weaknesses repaired. Production integration still needs verified stats, real fitment data, approved photography and dealer URLs.
+See `DESIGN.md` for the original design plan and reference observations. The current copy follows the client booklet, and the range now shows N1M, N1, GN and GR. Production integration still needs real fitment data and approved dealer URLs.
