@@ -2,7 +2,7 @@ import './style.css';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import {fitments} from './data.js';
+import {fitments,kitById,rimSizes} from './data.js';
 gsap.registerPlugin(ScrollTrigger);
 const $ = s => document.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -12,13 +12,27 @@ function closeMenu(){menu.setAttribute('aria-expanded','false');nav.classList.re
 menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);});
 nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();if(document.activeElement.closest('#navigation'))menu.focus();}});
-const brand=$('#brand'),model=$('#model'),year=$('#year'),result=$('#fit-result');
-function options(select,items,label){select.replaceChildren(new Option(`Select ${label}`,''),...items.map(v=>new Option(v,v)));select.disabled=!items.length;}
+const brand=$('#brand'),model=$('#model'),rim=$('#rim'),result=$('#fit-result');
+function options(select,items,label,format=v=>v){select.replaceChildren(new Option(`Select ${label}`,''),...items.map(v=>new Option(format(v),v)));select.disabled=!items.length;}
+const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
 options(brand,Object.keys(fitments),'brand');
-brand.addEventListener('change',()=>{options(model,Object.keys(fitments[brand.value]||{}),'model');options(year,[],'year');result.replaceChildren();});
-model.addEventListener('change',()=>{options(year,fitments[brand.value]?.[model.value]||[],'year');result.replaceChildren();});
-year.addEventListener('change',()=>result.replaceChildren());
-$('#fit-form').addEventListener('submit',e=>{e.preventDefault();if(!e.currentTarget.reportValidity())return;result.replaceChildren();const p=document.createElement('p');p.textContent=`Your car: ${year.value} ${brand.value} ${model.value}. This demo has no verified product matches. Ask a Nashin dealer to confirm a rotor, pad or complete kit for this vehicle.`;const a=document.createElement('a');a.href='https://nashinbrakes.com';a.target='_blank';a.rel='noopener';a.textContent='Open Nashin to contact a dealer ↗︎';result.append(p,a);});
+brand.addEventListener('change',()=>{options(model,Object.keys(fitments[brand.value]||{}),'model');options(rim,[],'rim size');result.replaceChildren();});
+model.addEventListener('change',()=>{options(rim,model.value?rimSizes:[],'rim size',v=>`${v}″`);result.replaceChildren();});
+rim.addEventListener('change',()=>result.replaceChildren());
+$('#fit-form').addEventListener('submit',e=>{
+ e.preventDefault();if(!e.currentTarget.reportValidity())return;
+ const size=Number(rim.value),matches=fitments[brand.value][model.value].map(id=>kitById[id]).sort((a,b)=>a.minRim-b.minRim||a.rotor-b.rotor);
+ const fits=matches.filter(k=>k.minRim<=size),bigger=matches.filter(k=>k.minRim>size);
+ const head=el('p','fit-summary');head.append(`${brand.value} ${model.value} on ${size}″ rims: `,el('strong',null,fits.length?`${fits.length} kit${fits.length>1?'s':''} fit${fits.length>1?'':'s'}.`:'no kit fits this rim size.'));
+ const list=el('ul','fit-kits');
+ for(const k of [...fits,...bigger]){
+  const ok=k.minRim<=size,li=el('li',ok?'fits':'needs');
+  li.append(el('span','kit-series',k.series),el('span','kit-spec',`${k.rotor}mm rotor · min ${k.minRim}″ rim`),el('span','kit-status',ok?'Fits':`Needs ${k.minRim}″+`));
+  list.append(li);
+ }
+ const a=el('a',null,'Confirm with a Nashin dealer ↗︎');a.href='https://nashinbrakes.com';a.target='_blank';a.rel='noopener';
+ result.replaceChildren(head,list,a);
+});
 let lenis;
 const media=gsap.matchMedia();
 media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-reduced-motion: reduce)'},context=>{
