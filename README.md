@@ -37,10 +37,10 @@ Import the repository into the owner's Vercel account. Use `npm run build` as th
 
 ## Content and assets
 
-- `src/data.js` contains the demonstration vehicle dataset. The unverified performance and reach figures have been removed from the page.
-- The finder supports Honda, Toyota, BMW and Proton with dependent model/year selections. It deliberately reports no verified product matches. Connect a reviewed fitment database before using this for sales.
+- `src/data.js` holds the fitment list supplied by Nashin, grouped by series and rotor size (N1 286/302mm, N3/GN3 330/345mm, N3/GN3/GR3 355mm, N5/GN5/GR5 355mm, GN5/GR5 380mm, GN8 355mm), then brand and model, plus rim sizes 15–20".
+- The finder runs Series → Brand → Model → Rim size. Submitting opens WhatsApp (wa.me/60162953252) with a prefilled enquiry, and shows the message with a fallback link if the pop-up is blocked.
 - Original transparent component placeholders live in `public/images/*.svg`. Replace the matching SVG file without changing code. `rotor-ring.svg` is the friction-only version for the exploded diagram; `rotor.svg` includes the centre for standalone illustrations. All product illustrations are schematic, not CAD or exact product representations.
-- Product cutouts live in `public/images/products/*.webp`. The N1M, N1, GN8 and GR5 card images are transparent WebP cutouts derived from the supplied model photos; GN8 and GR5 represent their respective series. Keep replacement cutouts trimmed with a small transparent border.
+- Product cutouts live in `public/images/products/*.webp`. The N1M (lime green), N1 (red), GN8 and GR5 card images are transparent WebP cutouts derived from the supplied model photos; GN8 and GR5 represent their respective series. Keep replacement cutouts trimmed with a small transparent border.
 - `kit.webp` is a filler product photograph fetched from Nashin's public site: https://static.wixstatic.com/media/6a5387_22f2d64ace2640f387443b5fcf20ffc0~mv2.jpg . Confirm rights and approved product photography before launch.
 - `create-assets.py` reproduces the original SVG placeholders and downloads that filler photograph. It is not required to build or run.
 - Dealer CTAs route to the official Nashin site. No dealer directory or verified location list was available; wire in the approved dealer destination before launch.
@@ -63,4 +63,4 @@ Nine browser tests cover 375, 414, 768, 1024 and 1440px widths, reduced-motion r
 
 ## Design review
 
-See `DESIGN.md` for the original design plan and reference observations. The current copy follows the client booklet, and the range now shows N1M, N1, GN and GR. Production integration still needs real fitment data and approved dealer URLs.
+See `DESIGN.md` for the original design plan and reference observations. The current copy follows the client booklet, and the range now shows N1M, N1, GN and GR. Production integration still needs approved dealer URLs.

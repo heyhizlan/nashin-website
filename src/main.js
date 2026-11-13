@@ -2,7 +2,7 @@ import './style.css';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import {fitments} from './data.js';
+import {fitments,rimSizes} from './data.js';
 gsap.registerPlugin(ScrollTrigger);
 const $ = s => document.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -12,13 +12,20 @@ function closeMenu(){menu.setAttribute('aria-expanded','false');nav.classList.re
 menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open);});
 nav.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();if(document.activeElement.closest('#navigation'))menu.focus();}});
-const brand=$('#brand'),model=$('#model'),year=$('#year'),result=$('#fit-result');
-function options(select,items,label){select.replaceChildren(new Option(`Select ${label}`,''),...items.map(v=>new Option(v,v)));select.disabled=!items.length;}
-options(brand,Object.keys(fitments),'brand');
-brand.addEventListener('change',()=>{options(model,Object.keys(fitments[brand.value]||{}),'model');options(year,[],'year');result.replaceChildren();});
-model.addEventListener('change',()=>{options(year,fitments[brand.value]?.[model.value]||[],'year');result.replaceChildren();});
-year.addEventListener('change',()=>result.replaceChildren());
-$('#fit-form').addEventListener('submit',e=>{e.preventDefault();if(!e.currentTarget.reportValidity())return;result.replaceChildren();const p=document.createElement('p');p.textContent=`Your car: ${year.value} ${brand.value} ${model.value}. This demo has no verified product matches. Ask a Nashin dealer to confirm a rotor, pad or complete kit for this vehicle.`;const a=document.createElement('a');a.href='https://nashinbrakes.com';a.target='_blank';a.rel='noopener';a.textContent='Open Nashin to contact a dealer ↗︎';result.append(p,a);});
+const series=$('#fit-series'),brand=$('#fit-brand'),model=$('#fit-model'),rim=$('#fit-rim'),result=$('#fit-result');
+const WHATSAPP='60162953252';
+function options(select,items,label,format=v=>v){select.replaceChildren(new Option(`Select ${label}`,''),...items.map(v=>new Option(format(v),v)));select.disabled=!items.length;}
+options(series,Object.keys(fitments),'series');
+options(rim,rimSizes,'rim size',v=>`${v}"`);
+series.addEventListener('change',()=>{options(brand,Object.keys(fitments[series.value]||{}),'brand');options(model,[],'model');result.replaceChildren();});
+brand.addEventListener('change',()=>{options(model,fitments[series.value]?.[brand.value]||[],'model');result.replaceChildren();});
+model.addEventListener('change',()=>result.replaceChildren());
+rim.addEventListener('change',()=>result.replaceChildren());
+$('#fit-form').addEventListener('submit',e=>{e.preventDefault();if(!e.currentTarget.reportValidity())return;
+ const message=`Hi Nashin, I'm interested in the ${series.value} brake kit. My car is a ${brand.value} ${model.value} running ${rim.value}-inch rims. Could you confirm fitment, price and availability?`;
+ const url=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+ result.replaceChildren();const p=document.createElement('p');p.textContent=`“${message}”`;const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='WhatsApp didn’t open? Send it here ↗︎';result.append(p,a);
+ window.open(url,'_blank','noopener');});
 let lenis;
 const media=gsap.matchMedia();
 media.add({motion:'(prefers-reduced-motion: no-preference)',reduce:'(prefers-reduced-motion: reduce)'},context=>{

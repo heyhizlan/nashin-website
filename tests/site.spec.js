@@ -10,11 +10,14 @@ for(const width of [375,414,768,1024,1440]){
   for(const c of await page.locator('.callout').all())await expect(c).toBeVisible();
  });
 }
-test('dependent fitments reset and return an honest demo result',async({page})=>{
- await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');
- await expect(page.locator('#model')).toBeDisabled();await page.selectOption('#brand','Honda');await page.selectOption('#model','Civic');await page.selectOption('#year','2023');await page.getByRole('button',{name:'Find my Nashin'}).click();
- await expect(page.locator('#fit-result')).toContainText('2023 Honda Civic');await expect(page.locator('#fit-result')).toContainText('no verified product matches');
- await page.selectOption('#brand','BMW');await expect(page.locator('#year')).toBeDisabled();await expect(page.locator('#model')).toHaveValue('');await expect(page.locator('#fit-result')).toBeEmpty();
+test('fit finder builds a WhatsApp message and resets dependent fields',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>{window.open=(u)=>{window.__opened=u;return null;};});await page.goto('/');
+ await expect(page.locator('#fit-brand')).toBeDisabled();await expect(page.locator('#fit-model')).toBeDisabled();
+ await page.selectOption('#fit-series','N3/GN3 330mm');await page.selectOption('#fit-brand','Toyota');await page.selectOption('#fit-model','Camry ACV30/40/50/70');await page.selectOption('#fit-rim','18');
+ await page.getByRole('button',{name:'Send on WhatsApp'}).click();
+ await expect(page.locator('#fit-result')).toContainText('N3/GN3 330mm brake kit. My car is a Toyota Camry ACV30/40/50/70 running 18-inch rims');
+ const opened=await page.evaluate(()=>window.__opened);expect(opened).toContain('https://wa.me/60162953252?text=');expect(decodeURIComponent(opened)).toContain('18-inch rims');
+ await page.selectOption('#fit-series','N1 286mm');await expect(page.locator('#fit-model')).toBeDisabled();await expect(page.locator('#fit-brand')).toHaveValue('');await expect(page.locator('#fit-result')).toBeEmpty();
 });
 test('mobile menu supports keyboard, closes on Escape, and focus is visible',async({page})=>{
  await page.setViewportSize({width:375,height:812});await page.goto('/');const menu=page.getByRole('button',{name:'Menu'});await menu.focus();await page.keyboard.press('Enter');await expect(menu).toHaveAttribute('aria-expanded','true');await page.locator('#navigation a').first().focus();await page.keyboard.press('Escape');await expect(menu).toBeFocused();await expect(menu).toHaveAttribute('aria-expanded','false');expect(await menu.evaluate(e=>getComputedStyle(e).outlineStyle)).toBe('solid');
