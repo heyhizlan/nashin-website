@@ -10,18 +10,11 @@ for(const width of [375,414,768,1024,1440]){
   for(const c of await page.locator('.callout').all())await expect(c).toBeVisible();
  });
 }
-test('every client fitment entry maps to a model',async()=>{
- const {parseKits}=await import('../src/data.js');expect(parseKits().unmapped).toEqual([]);
-});
-test('fitment finder filters kits by rim size and resets on change',async({page})=>{
+test('dependent fitments reset and return an honest demo result',async({page})=>{
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');
- await expect(page.locator('#model')).toBeDisabled();await expect(page.locator('#rim')).toBeDisabled();
- await page.selectOption('#brand','Honda');await page.selectOption('#model','Civic FD');await page.selectOption('#rim','17');
- await page.getByRole('button',{name:'Find my Nashin'}).click();
- const r=page.locator('#fit-result');await expect(r).toContainText('Honda Civic FD on 17″ rims');
- await expect(r.locator('li.fits')).toHaveCount(1);await expect(r.locator('li.needs')).toHaveCount(3);await expect(r.locator('li.fits')).toContainText('330mm');
- await page.selectOption('#rim','15');await expect(r).toBeEmpty();await page.getByRole('button',{name:'Find my Nashin'}).click();await expect(r).toContainText('no kit fits');
- await page.selectOption('#brand','Proton');await expect(page.locator('#rim')).toBeDisabled();await expect(page.locator('#model')).toHaveValue('');await expect(r).toBeEmpty();
+ await expect(page.locator('#model')).toBeDisabled();await page.selectOption('#brand','Honda');await page.selectOption('#model','Civic');await page.selectOption('#year','2023');await page.getByRole('button',{name:'Find my Nashin'}).click();
+ await expect(page.locator('#fit-result')).toContainText('2023 Honda Civic');await expect(page.locator('#fit-result')).toContainText('no verified product matches');
+ await page.selectOption('#brand','BMW');await expect(page.locator('#year')).toBeDisabled();await expect(page.locator('#model')).toHaveValue('');await expect(page.locator('#fit-result')).toBeEmpty();
 });
 test('mobile menu supports keyboard, closes on Escape, and focus is visible',async({page})=>{
  await page.setViewportSize({width:375,height:812});await page.goto('/');const menu=page.getByRole('button',{name:'Menu'});await menu.focus();await page.keyboard.press('Enter');await expect(menu).toHaveAttribute('aria-expanded','true');await page.locator('#navigation a').first().focus();await page.keyboard.press('Escape');await expect(menu).toBeFocused();await expect(menu).toHaveAttribute('aria-expanded','false');expect(await menu.evaluate(e=>getComputedStyle(e).outlineStyle)).toBe('solid');

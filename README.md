@@ -37,9 +37,8 @@ Import the repository into the owner's Vercel account. Use `npm run build` as th
 
 ## Content and assets
 
-- `src/data.js` holds the client's fitment lists verbatim (8 kits: N1 286/302mm, N3/GN3 330/345mm, N3/GN3/GR3 355mm, N5/GN5/GR5 355mm, GN5/GR5 380mm, GN8 355mm). An alias table cleans up model names; the test suite fails if a new client entry has no alias. To update, paste the client's list into the matching kit and add any missing aliases.
-- The finder runs Brand → Model → Rim size and lists every kit for that car, marking each as fitting the chosen rim or needing a bigger one.
-- **Minimum rim sizes (`minRim` in `src/data.js`) are working values pending client confirmation:** 286mm → 15″, 302mm → 16″, 330mm → 17″, 345/355mm → 18″, 380mm → 19″.
+- `src/data.js` contains the demonstration vehicle dataset. The unverified performance and reach figures have been removed from the page.
+- The finder supports Honda, Toyota, BMW and Proton with dependent model/year selections. It deliberately reports no verified product matches. Connect a reviewed fitment database before using this for sales.
 - Original transparent component placeholders live in `public/images/*.svg`. Replace the matching SVG file without changing code. `rotor-ring.svg` is the friction-only version for the exploded diagram; `rotor.svg` includes the centre for standalone illustrations. All product illustrations are schematic, not CAD or exact product representations.
 - Product cutouts live in `public/images/products/*.webp`. The N1M, N1, GN8 and GR5 card images are transparent WebP cutouts derived from the supplied model photos; GN8 and GR5 represent their respective series. Keep replacement cutouts trimmed with a small transparent border.
 - `kit.webp` is a filler product photograph fetched from Nashin's public site: https://static.wixstatic.com/media/6a5387_22f2d64ace2640f387443b5fcf20ffc0~mv2.jpg . Confirm rights and approved product photography before launch.
